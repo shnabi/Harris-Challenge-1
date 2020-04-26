@@ -11,19 +11,43 @@
 import json
 
 # do not delete; this is the data you'll be working with
-divvy_stations = json.loads(open('divvy_stations.txt').read())
+divvy_stations = json.loads(open(r'C:\Users\Shehryar\Dropbox\UChicago\Classes\Spring 2020\Data and Programming\Harris-Challenge_1\divvy_stations.txt').read())
 
 # PROBLEM 1
 # find average number of empty docks (num_docks_available) and 
 # available bikes (num_bikes_available) at all stations in the system
 
+mean_empty_docks = sum([i['num_docks_available'] for i in divvy_stations])/595
+print(mean_empty_docks)
+
+mean_avail_bikes = sum([i['num_bikes_available'] for i in divvy_stations])/595
+print(mean_avail_bikes)
 
 # PROBLEM 2
 # find ratio of bikes that are currently rented to total bikes in the system (ignore ebikes)
 
+empty_docks = sum([i['num_docks_available'] for i in divvy_stations])
+bikes_system = (sum([i['num_docks_available'] for i in divvy_stations]) + 
+                sum([i['num_bikes_available'] for i in divvy_stations]))
+ratio = empty_docks/bikes_system
+print(ratio)   
 
 # PROBLEM 3 
 # Add a new variable for each divvy station's entry, "percent_bikes_remaining", that shows 
 # the percentage of bikes available at each individual station (again ignore ebikes). 
 # This variable should be formatted as a percentage rounded to 2 decimal places, e.g. 66.67%
+# percent_bikes_remaining = ((i['num_bikes_available'])/(i['num_bikes_available'] + i['num_docks_available']))*100) for i in divvy_stations]
 
+def pct(i):
+      percent = str(
+          round(
+              (
+                  i['num_bikes_available']/(i['num_bikes_available'] + 
+                                            i['num_docks_available'])
+               )
+              *100, 2)
+      ) + '%'
+      return percent
+
+for d in divvy_stations:
+    d.update({'percent_bikes_remaining': pct(d)})
