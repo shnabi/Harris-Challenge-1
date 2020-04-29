@@ -36,7 +36,7 @@ print(ratio)
 # Add a new variable for each divvy station's entry, "percent_bikes_remaining", that shows 
 # the percentage of bikes available at each individual station (again ignore ebikes). 
 # This variable should be formatted as a percentage rounded to 2 decimal places, e.g. 66.67%
-# percent_bikes_remaining = ((i['num_bikes_available'])/(i['num_bikes_available'] + i['num_docks_available']))*100) for i in divvy_stations]
+
 
 def pct(i):
       percent = str(
